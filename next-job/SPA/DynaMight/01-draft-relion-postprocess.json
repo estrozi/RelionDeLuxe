@@ -1,0 +1,7 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "dynamight",
+  "action": "draft",
+  "target": "relion.postprocess"
+}

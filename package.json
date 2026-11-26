@@ -1,0 +1,21 @@
+{
+  "name": "reliondeluxe",
+  "version": "0.15.320",
+  "private": true,
+  "description": "Browser-based SPA/STA interface for RELION 5.0 and 5.1",
+  "type": "module",
+  "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "sh scripts/start.sh",
+    "demo": "sh scripts/start.sh --demo",
+    "test": "node --test test/*.test.mjs",
+    "diagnose": "\"$npm_node_execpath\" scripts/diagnose-environment.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estrozi/RelionDeLuxe.git"
+  }
+}

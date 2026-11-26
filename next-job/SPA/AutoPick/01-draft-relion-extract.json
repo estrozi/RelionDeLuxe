@@ -1,0 +1,13 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.autopick",
+  "action": "draft",
+  "target": "relion.extract",
+  "when": {
+    "not": {
+      "field": "context.topazTraining",
+      "equals": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.denoisetomo",
+  "action": "draft",
+  "target": "relion.picktomo",
+  "when": {
+    "not": {
+      "field": "values.do_cryocare_train",
+      "equals": "Yes"
+    }
+  }
+}

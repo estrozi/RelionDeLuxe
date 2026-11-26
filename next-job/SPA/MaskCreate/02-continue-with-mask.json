@@ -1,0 +1,21 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.maskcreate",
+  "action": "continue-with-mask",
+  "when": {
+    "all": [
+      {
+        "field": "job.status",
+        "equals": "Succeeded"
+      },
+      {
+        "not": {
+          "field": "job.maskRefinement",
+          "empty": true
+        }
+      }
+    ]
+  },
+  "label": "Continue 3D refinement with this mask"
+}

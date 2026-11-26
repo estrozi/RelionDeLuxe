@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tomogram viewer · RelionDeLuxe</title><link rel="stylesheet" href="/tomo_pick.css"><script type="module" src="/tomo_pick.js"></script></head>
+<body>
+<header><strong>RelionDeLuxe · Tomogram viewer</strong><span>Read-only</span><span id="file"></span></header>
+<section class="controls" aria-label="Tomogram display">
+<label>Tomogram <select id="tomogram"></select></label>
+<label>Image <select id="source"></select></label>
+<label>Scale <select id="scale"><option value="native">1:1 (no scaling)</option><option value="width">Fit width</option><option value="height" selected>Fit height</option></select></label>
+<label>Direction <select id="axis"><option>X</option><option>Y</option><option selected>Z</option></select></label>
+<label>Slice <input id="slice" type="range" disabled min="0" max="0" value="0" step="1"><output id="slice-number">—</output></label>
+<label>Contrast (σ) <input id="contrast" type="range" min=".25" max="5" value="3" step=".05"></label>
+<label>Brightness <input id="brightness" type="range" min="-2" max="2" value="0" step=".05"></label>
+<label><input id="invert" type="checkbox"> Invert</label>
+<span id="pick-controls" hidden><label><input id="crosses" type="checkbox" checked> Crosses</label><label id="elements-control" hidden><input id="elements" type="checkbox" checked> Elements</label><label>± <input id="depth" type="number" min="0" max="10000" value="2" step="1"> slices</label></span>
+</section>
+<p id="status" role="status">Loading tomograms…</p><p id="warning" role="alert" hidden></p>
+<main id="viewport" tabindex="0" aria-label="Tomogram slice; scroll to inspect the full image"><div id="image"><canvas id="density"></canvas><canvas id="overlay" aria-label="Read-only particle coordinates"></canvas></div></main>
+<footer id="info">Coordinates are read-only. No picking or saving is performed.</footer>
+</body></html>

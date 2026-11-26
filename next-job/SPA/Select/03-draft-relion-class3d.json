@@ -1,0 +1,22 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.select",
+  "action": "draft",
+  "target": "relion.class3d",
+  "when": {
+    "all": [
+      {
+        "field": "job.status",
+        "in": [
+          "Running",
+          "Scheduled"
+        ]
+      },
+      {
+        "field": "context.subset3D",
+        "equals": true
+      }
+    ]
+  }
+}

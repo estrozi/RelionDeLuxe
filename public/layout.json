@@ -1,0 +1,4209 @@
+[
+  {
+    "id": 0,
+    "label": "relion.import",
+    "name": "Import",
+    "tabs": {
+      "Movies/Mics/Others": [
+        "do_raw",
+        "fn_in_raw",
+        "is_multiframe",
+        "optics_group_name",
+        "fn_mtf",
+        "angpix",
+        "kV",
+        "Cs",
+        "Q0",
+        "beamtilt_x",
+        "beamtilt_y",
+        "do_other",
+        "fn_in_other",
+        "node_type",
+        "optics_group_particles"
+      ]
+    },
+    "fields": {
+      "do_raw": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_in_raw": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "is_multiframe": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "optics_group_name": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mtf": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "angpix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "kV": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "Cs": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "Q0": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "beamtilt_x": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "beamtilt_y": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_raw",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_other": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_in_other": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_other",
+            "value": "Yes"
+          }
+        ]
+      },
+      "node_type": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_other",
+            "value": "Yes"
+          }
+        ]
+      },
+      "optics_group_particles": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_other",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_queue": {
+        "toggle": "TOGGLE_ALWAYS_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {
+      "do_queue": "No",
+      "fn_in_raw": "Movies/*.tif"
+    }
+  },
+  {
+    "id": 1,
+    "label": "relion.motioncorr",
+    "name": "Motion correction",
+    "tabs": {
+      "I/O": [
+        "input_star_mics",
+        "first_frame_sum",
+        "last_frame_sum",
+        "dose_per_frame",
+        "pre_exposure",
+        "eer_grouping",
+        "do_float16",
+        "do_even_odd_split",
+        "do_dose_weighting",
+        "do_save_noDW",
+        "do_save_ps",
+        "group_for_ps"
+      ],
+      "Motion": [
+        "bfactor",
+        "patch_x",
+        "patch_y",
+        "group_frames",
+        "bin_factor",
+        "fn_gain_ref",
+        "gain_rot",
+        "gain_flip",
+        "fn_defect",
+        "do_own_motioncor",
+        "fn_motioncor2_exe",
+        "gpu_ids",
+        "other_motioncor2_args"
+      ]
+    },
+    "fields": {
+      "input_star_mics": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "first_frame_sum": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "last_frame_sum": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dose_per_frame": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "pre_exposure": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "eer_grouping": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_float16": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_even_odd_split": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_dose_weighting": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_save_noDW": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_dose_weighting",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_save_ps": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "group_for_ps": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_save_ps",
+            "value": "Yes"
+          }
+        ]
+      },
+      "bfactor": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "patch_x": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "patch_y": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "group_frames": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "bin_factor": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_gain_ref": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "gain_rot": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "gain_flip": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_defect": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_own_motioncor": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_motioncor2_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_own_motioncor",
+            "value": "No"
+          }
+        ]
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_own_motioncor",
+            "value": "No"
+          }
+        ]
+      },
+      "other_motioncor2_args": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_own_motioncor",
+            "value": "No"
+          }
+        ]
+      }
+    },
+    "overrides": {
+      "patch_x": "5",
+      "patch_y": "5"
+    }
+  },
+  {
+    "id": 2,
+    "label": "relion.ctffind",
+    "name": "CTF estimation",
+    "tabs": {
+      "I/O": [
+        "input_star_mics",
+        "use_noDW",
+        "do_phaseshift",
+        "phase_min",
+        "phase_max",
+        "phase_step",
+        "dast"
+      ],
+      "CTFFIND-4.1": [
+        "fn_ctffind_exe",
+        "use_given_ps",
+        "slow_search",
+        "ctf_win",
+        "box",
+        "resmin",
+        "resmax",
+        "dfmin",
+        "dfmax",
+        "dfstep",
+        "localsearch_nominal_defocus",
+        "exp_factor_dose"
+      ]
+    },
+    "fields": {
+      "input_star_mics": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "use_noDW": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_phaseshift": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "phase_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_phaseshift",
+            "value": "Yes"
+          }
+        ]
+      },
+      "phase_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_phaseshift",
+            "value": "Yes"
+          }
+        ]
+      },
+      "phase_step": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_phaseshift",
+            "value": "Yes"
+          }
+        ]
+      },
+      "dast": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_ctffind_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "use_given_ps": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "slow_search": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ctf_win": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "box": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "resmin": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "resmax": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dfmin": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dfmax": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dfstep": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "localsearch_nominal_defocus": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "exp_factor_dose": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 3,
+    "label": "relion.manualpick",
+    "name": "Manual picking",
+    "tabs": {
+      "I/O": [
+        "fn_in",
+        "do_fom_threshold",
+        "minimum_pick_fom"
+      ],
+      "Display": [
+        "diameter",
+        "micscale",
+        "sigma_contrast",
+        "white_val",
+        "black_val",
+        "lowpass",
+        "highpass",
+        "angpix",
+        "do_topaz_denoise"
+      ],
+      "Colors": [
+        "do_color",
+        "color_label",
+        "fn_color",
+        "blue_value",
+        "red_value"
+      ]
+    },
+    "fields": {
+      "fn_in": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_fom_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "minimum_pick_fom": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_fom_threshold",
+            "value": "Yes"
+          }
+        ]
+      },
+      "diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "micscale": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "sigma_contrast": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "white_val": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "black_val": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "lowpass": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_topaz_denoise",
+            "value": "No"
+          }
+        ]
+      },
+      "highpass": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_topaz_denoise",
+            "value": "No"
+          }
+        ]
+      },
+      "angpix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_topaz_denoise",
+            "value": "No"
+          }
+        ]
+      },
+      "do_topaz_denoise": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_color": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "color_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_color",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_color": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_color",
+            "value": "Yes"
+          }
+        ]
+      },
+      "blue_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_color",
+            "value": "Yes"
+          }
+        ]
+      },
+      "red_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_color",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_queue": {
+        "toggle": "TOGGLE_ALWAYS_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {
+      "do_queue": "No"
+    }
+  },
+  {
+    "id": 4,
+    "label": "relion.autopick",
+    "name": "Auto-picking",
+    "tabs": {
+      "I/O": [
+        "fn_input_autopick",
+        "angpix",
+        "do_refs",
+        "do_log",
+        "do_topaz",
+        "do_topaz_train",
+        "do_topaz_pick",
+        "continue_manual"
+      ],
+      "Laplacian": [
+        "log_diam_min",
+        "log_diam_max",
+        "log_invert",
+        "log_maxres",
+        "log_adjust_thr",
+        "log_upper_thr"
+      ],
+      "Topaz": [
+        "fn_topaz_exe",
+        "topaz_particle_diameter",
+        "topaz_nr_particles",
+        "topaz_train_picks",
+        "do_topaz_train_parts",
+        "topaz_train_parts",
+        "topaz_model",
+        "do_topaz_filaments",
+        "topaz_filament_threshold",
+        "topaz_hough_length",
+        "topaz_other_args"
+      ],
+      "References": [
+        "fn_refs_autopick",
+        "do_ref3d",
+        "fn_ref3d_autopick",
+        "ref3d_symmetry",
+        "ref3d_sampling",
+        "lowpass",
+        "highpass",
+        "angpix_ref",
+        "psi_sampling_autopick",
+        "do_invert_refs",
+        "do_ctf_autopick",
+        "do_ignore_first_ctfpeak_autopick"
+      ],
+      "autopicking": [
+        "threshold_autopick",
+        "mindist_autopick",
+        "maxstddevnoise_autopick",
+        "minavgnoise_autopick",
+        "do_write_fom_maps",
+        "do_read_fom_maps",
+        "shrink",
+        "use_gpu",
+        "gpu_ids"
+      ],
+      "Helix": [
+        "do_pick_helical_segments",
+        "helical_tube_outer_diameter",
+        "helical_tube_length_min",
+        "helical_tube_kappa_max",
+        "helical_nr_asu",
+        "helical_rise",
+        "do_amyloid"
+      ]
+    },
+    "fields": {
+      "fn_input_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "angpix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_refs": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_log": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_topaz": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "continue_manual": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "log_diam_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "log_diam_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "log_invert": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "log_maxres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "log_adjust_thr": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "log_upper_thr": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "fn_topaz_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "topaz_particle_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_topaz_train": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_nr_particles": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_train",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_train_picks": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_train",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_topaz_train_parts": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_train",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_train_parts": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_train",
+            "value": "Yes"
+          },
+          {
+            "key": "do_topaz_train_parts",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_topaz_pick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_model": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_pick",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_topaz_filaments": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_pick",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_filament_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_pick",
+            "value": "Yes"
+          },
+          {
+            "key": "do_topaz_filaments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_hough_length": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_topaz_pick",
+            "value": "Yes"
+          },
+          {
+            "key": "do_topaz_filaments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "topaz_other_args": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_refs_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_ref3d": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_ref3d_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ref3d",
+            "value": "Yes"
+          }
+        ]
+      },
+      "ref3d_symmetry": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ref3d",
+            "value": "Yes"
+          }
+        ]
+      },
+      "ref3d_sampling": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ref3d",
+            "value": "Yes"
+          }
+        ]
+      },
+      "lowpass": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "highpass": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "angpix_ref": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "psi_sampling_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_invert_refs": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_ctf_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_ignore_first_ctfpeak_autopick": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ctf_autopick",
+            "value": "Yes"
+          }
+        ]
+      },
+      "threshold_autopick": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "mindist_autopick": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "maxstddevnoise_autopick": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "minavgnoise_autopick": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_write_fom_maps": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_read_fom_maps": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "shrink": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_pick_helical_segments": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "helical_tube_outer_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_tube_length_min": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_tube_kappa_max": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_nr_asu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_amyloid": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_pick_helical_segments",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {
+      "do_log": "Yes",
+      "do_refs": "No",
+      "do_topaz": "No"
+    }
+  },
+  {
+    "id": 5,
+    "label": "relion.extract",
+    "name": "Particle extraction",
+    "tabs": {
+      "I/O": [
+        "star_mics",
+        "coords_suffix",
+        "do_reextract",
+        "fndata_reextract",
+        "do_reset_offsets",
+        "do_recenter",
+        "recenter_x",
+        "recenter_y",
+        "recenter_z",
+        "do_float16"
+      ],
+      "extract": [
+        "extract_size",
+        "do_invert",
+        "do_norm",
+        "bg_diameter",
+        "white_dust",
+        "black_dust",
+        "do_rescale",
+        "rescale",
+        "do_fom_threshold",
+        "minimum_pick_fom"
+      ],
+      "Helix": [
+        "do_extract_helix",
+        "helical_tube_outer_diameter",
+        "helical_bimodal_angular_priors",
+        "do_extract_helical_tubes",
+        "do_cut_into_segments",
+        "helical_nr_asu",
+        "helical_rise"
+      ]
+    },
+    "fields": {
+      "star_mics": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "coords_suffix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_reextract": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fndata_reextract": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_reset_offsets": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_recenter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          }
+        ]
+      },
+      "recenter_x": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          },
+          {
+            "key": "do_recenter",
+            "value": "Yes"
+          }
+        ]
+      },
+      "recenter_y": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          },
+          {
+            "key": "do_recenter",
+            "value": "Yes"
+          }
+        ]
+      },
+      "recenter_z": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_reextract",
+            "value": "Yes"
+          },
+          {
+            "key": "do_recenter",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_float16": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "extract_size": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_invert": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_norm": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "bg_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_norm",
+            "value": "Yes"
+          }
+        ]
+      },
+      "white_dust": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_norm",
+            "value": "Yes"
+          }
+        ]
+      },
+      "black_dust": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_norm",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_rescale": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "rescale": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_rescale",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_fom_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "minimum_pick_fom": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_fom_threshold",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_extract_helix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "helical_tube_outer_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_bimodal_angular_priors": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_extract_helical_tubes": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_cut_into_segments": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_extract_helical_tubes",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_nr_asu": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_extract_helical_tubes",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_extract_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_extract_helical_tubes",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 8,
+    "label": "relion.class2d",
+    "name": "2D classification",
+    "tabs": {
+      "I/O": [
+        "fn_img",
+        "fn_cont"
+      ],
+      "CTF": [
+        "do_ctf_correction",
+        "ctf_intact_first_peak"
+      ],
+      "Optimisation": [
+        "nr_classes",
+        "tau_fudge",
+        "do_em",
+        "nr_iter_em",
+        "do_grad",
+        "nr_iter_grad",
+        "particle_diameter",
+        "do_zero_mask",
+        "highres_limit",
+        "do_center"
+      ],
+      "Sampling": [
+        "dont_skip_align",
+        "psi_sampling",
+        "offset_range",
+        "offset_step",
+        "allow_coarser"
+      ],
+      "Helix": [
+        "do_helix",
+        "helical_tube_outer_diameter",
+        "do_bimodal_psi",
+        "range_psi",
+        "do_restrict_xoff",
+        "helical_rise"
+      ],
+      "Compute": [
+        "do_parallel_discio",
+        "nr_pool",
+        "do_preread_images",
+        "scratch_dir",
+        "do_combine_thru_disc",
+        "use_gpu",
+        "gpu_ids"
+      ]
+    },
+    "fields": {
+      "fn_img": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_cont": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "do_ctf_correction": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ctf_intact_first_peak": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ctf_correction",
+            "value": "Yes"
+          }
+        ]
+      },
+      "nr_classes": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "tau_fudge": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_em": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "nr_iter_em": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_em",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_grad": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "nr_iter_grad": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_grad",
+            "value": "Yes"
+          }
+        ]
+      },
+      "particle_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_zero_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "highres_limit": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_center": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "dont_skip_align": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "psi_sampling": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "offset_range": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "offset_step": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "allow_coarser": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_helix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "helical_tube_outer_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_bimodal_psi": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_psi": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_restrict_xoff": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_restrict_xoff",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_parallel_discio": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_pool": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preread_images": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "scratch_dir": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_preread_images",
+            "value": "No"
+          }
+        ]
+      },
+      "do_combine_thru_disc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {
+      "nr_classes": "25"
+    }
+  },
+  {
+    "id": 18,
+    "label": "relion.initialmodel",
+    "name": "3D initial reference",
+    "tabs": {
+      "I/O": [
+        "fn_img",
+        "fn_cont"
+      ],
+      "CTF": [
+        "do_ctf_correction",
+        "ctf_intact_first_peak"
+      ],
+      "Optimisation": [
+        "nr_iter",
+        "tau_fudge",
+        "nr_classes",
+        "particle_diameter",
+        "do_solvent",
+        "sym_name",
+        "do_run_C1",
+        "sigma_tilt"
+      ],
+      "Compute": [
+        "do_parallel_discio",
+        "nr_pool",
+        "do_preread_images",
+        "scratch_dir",
+        "do_combine_thru_disc",
+        "use_gpu",
+        "gpu_ids"
+      ]
+    },
+    "fields": {
+      "fn_img": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_cont": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "do_ctf_correction": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ctf_intact_first_peak": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ctf_correction",
+            "value": "Yes"
+          }
+        ]
+      },
+      "nr_iter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "tau_fudge": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_classes": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "particle_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_solvent": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sym_name": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_run_C1": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sigma_tilt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_parallel_discio": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_pool": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preread_images": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "scratch_dir": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_preread_images",
+            "value": "No"
+          }
+        ]
+      },
+      "do_combine_thru_disc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 9,
+    "label": "relion.class3d",
+    "name": "3D classification",
+    "tabs": {
+      "I/O": [
+        "fn_img",
+        "fn_ref",
+        "fn_mask",
+        "fn_cont"
+      ],
+      "Reference": [
+        "ref_correct_greyscale",
+        "trust_ref_size",
+        "ini_high",
+        "sym_name"
+      ],
+      "CTF": [
+        "do_ctf_correction",
+        "ctf_intact_first_peak"
+      ],
+      "Optimisation": [
+        "nr_classes",
+        "tau_fudge",
+        "nr_iter",
+        "do_fast_subsets",
+        "particle_diameter",
+        "do_zero_mask",
+        "highres_limit",
+        "do_blush"
+      ],
+      "Sampling": [
+        "dont_skip_align",
+        "sampling",
+        "offset_range",
+        "offset_step",
+        "do_local_ang_searches",
+        "sigma_angles",
+        "relax_sym",
+        "allow_coarser",
+        "sigma_tilt"
+      ],
+      "Helix": [
+        "do_helix",
+        "helical_tube_inner_diameter",
+        "helical_tube_outer_diameter",
+        "range_rot",
+        "range_tilt",
+        "range_psi",
+        "helical_range_distance",
+        "keep_tilt_prior_fixed",
+        "do_apply_helical_symmetry",
+        "helical_nr_asu",
+        "helical_twist_initial",
+        "helical_rise_initial",
+        "helical_z_percentage",
+        "do_local_search_helical_symmetry",
+        "helical_twist_min",
+        "helical_twist_max",
+        "helical_twist_inistep",
+        "helical_rise_min",
+        "helical_rise_max",
+        "helical_rise_inistep"
+      ],
+      "Compute": [
+        "do_parallel_discio",
+        "nr_pool",
+        "do_pad1",
+        "do_preread_images",
+        "scratch_dir",
+        "do_combine_thru_disc",
+        "use_gpu",
+        "gpu_ids"
+      ]
+    },
+    "fields": {
+      "fn_img": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_ref": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mask": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "fn_cont": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "ref_correct_greyscale": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "trust_ref_size": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ini_high": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sym_name": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_ctf_correction": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ctf_intact_first_peak": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ctf_correction",
+            "value": "Yes"
+          }
+        ]
+      },
+      "nr_classes": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "tau_fudge": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_iter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_fast_subsets": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "particle_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_zero_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "highres_limit": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_blush": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dont_skip_align": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "sampling": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "offset_range": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "offset_step": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_local_ang_searches": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "sigma_angles": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_ang_searches",
+            "value": "Yes"
+          }
+        ]
+      },
+      "relax_sym": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_ang_searches",
+            "value": "Yes"
+          }
+        ]
+      },
+      "allow_coarser": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "sigma_tilt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "dont_skip_align",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_helix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "helical_tube_inner_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_tube_outer_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_rot": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_tilt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_psi": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_range_distance": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "keep_tilt_prior_fixed": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_apply_helical_symmetry": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_nr_asu": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_initial": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_initial": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_z_percentage": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_local_search_helical_symmetry": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_inistep": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_inistep": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_parallel_discio": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_pool": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_pad1": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preread_images": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "scratch_dir": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_preread_images",
+            "value": "No"
+          }
+        ]
+      },
+      "do_combine_thru_disc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {
+      "nr_classes": "3"
+    }
+  },
+  {
+    "id": 10,
+    "label": "relion.refine3d",
+    "name": "3D auto-refine",
+    "tabs": {
+      "I/O": [
+        "fn_img",
+        "fn_ref",
+        "fn_mask",
+        "fn_cont"
+      ],
+      "Reference": [
+        "ref_correct_greyscale",
+        "trust_ref_size",
+        "ini_high",
+        "sym_name"
+      ],
+      "CTF": [
+        "do_ctf_correction",
+        "ctf_intact_first_peak"
+      ],
+      "Optimisation": [
+        "particle_diameter",
+        "do_zero_mask",
+        "do_solvent_fsc",
+        "do_blush"
+      ],
+      "Auto-sampling": [
+        "sampling",
+        "offset_range",
+        "offset_step",
+        "auto_local_sampling",
+        "relax_sym",
+        "auto_faster",
+        "sigma_tilt"
+      ],
+      "Helix": [
+        "do_helix",
+        "helical_tube_inner_diameter",
+        "helical_tube_outer_diameter",
+        "range_rot",
+        "range_tilt",
+        "range_psi",
+        "helical_range_distance",
+        "keep_tilt_prior_fixed",
+        "do_apply_helical_symmetry",
+        "helical_nr_asu",
+        "helical_twist_initial",
+        "helical_rise_initial",
+        "helical_z_percentage",
+        "do_local_search_helical_symmetry",
+        "helical_twist_min",
+        "helical_twist_max",
+        "helical_twist_inistep",
+        "helical_rise_min",
+        "helical_rise_max",
+        "helical_rise_inistep"
+      ],
+      "Compute": [
+        "do_parallel_discio",
+        "nr_pool",
+        "do_pad1",
+        "do_preread_images",
+        "scratch_dir",
+        "do_combine_thru_disc",
+        "use_gpu",
+        "gpu_ids"
+      ]
+    },
+    "fields": {
+      "fn_img": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_ref": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mask": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "fn_cont": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "ref_correct_greyscale": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "trust_ref_size": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ini_high": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sym_name": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_ctf_correction": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "ctf_intact_first_peak": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_ctf_correction",
+            "value": "Yes"
+          }
+        ]
+      },
+      "particle_diameter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_zero_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_solvent_fsc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_blush": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sampling": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "offset_range": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "offset_step": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "auto_local_sampling": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "relax_sym": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "auto_faster": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "sigma_tilt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_helix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "helical_tube_inner_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_tube_outer_diameter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_rot": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_tilt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "range_psi": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_range_distance": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "keep_tilt_prior_fixed": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_apply_helical_symmetry": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_nr_asu": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_initial": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_initial": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_z_percentage": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_apply_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_local_search_helical_symmetry": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_twist_inistep": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_min": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_max": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "helical_rise_inistep": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          },
+          {
+            "key": "do_local_search_helical_symmetry",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_parallel_discio": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_pool": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_pad1": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preread_images": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "scratch_dir": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_preread_images",
+            "value": "No"
+          }
+        ]
+      },
+      "do_combine_thru_disc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 19,
+    "label": "relion.multibody",
+    "name": "3D multi-body",
+    "tabs": {
+      "I/O": [
+        "fn_in",
+        "fn_cont",
+        "fn_bodies",
+        "do_subtracted_bodies",
+        "do_blush"
+      ],
+      "Auto-sampling": [
+        "sampling",
+        "offset_range",
+        "offset_step"
+      ],
+      "Analyse": [
+        "do_analyse",
+        "nr_movies",
+        "do_select",
+        "select_eigenval",
+        "eigenval_min",
+        "eigenval_max"
+      ],
+      "Compute": [
+        "do_parallel_discio",
+        "nr_pool",
+        "do_pad1",
+        "do_preread_images",
+        "scratch_dir",
+        "do_combine_thru_disc",
+        "use_gpu",
+        "gpu_ids"
+      ]
+    },
+    "fields": {
+      "fn_in": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_cont": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "fn_bodies": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_subtracted_bodies": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_blush": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "sampling": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "offset_range": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "offset_step": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_analyse": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_movies": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_analyse",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_select": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_analyse",
+            "value": "Yes"
+          }
+        ]
+      },
+      "select_eigenval": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_analyse",
+            "value": "Yes"
+          },
+          {
+            "key": "do_select",
+            "value": "Yes"
+          }
+        ]
+      },
+      "eigenval_min": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_analyse",
+            "value": "Yes"
+          },
+          {
+            "key": "do_select",
+            "value": "Yes"
+          }
+        ]
+      },
+      "eigenval_max": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_analyse",
+            "value": "Yes"
+          },
+          {
+            "key": "do_select",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_parallel_discio": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "nr_pool": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_pad1": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preread_images": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "scratch_dir": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_preread_images",
+            "value": "No"
+          }
+        ]
+      },
+      "do_combine_thru_disc": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "use_gpu": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "gpu_ids": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "use_gpu",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 7,
+    "label": "relion.select",
+    "name": "Subset selection",
+    "tabs": {
+      "I/O": [
+        "fn_model",
+        "fn_mic",
+        "fn_data"
+      ],
+      "Class options": [
+        "do_class_ranker",
+        "do_dominant_3d",
+        "rank_threshold",
+        "select_nr_parts",
+        "select_nr_classes",
+        "do_recenter",
+        "do_regroup",
+        "nr_groups"
+      ],
+      "Subsets": [
+        "do_select_values",
+        "select_label",
+        "select_minval",
+        "select_maxval",
+        "do_discard",
+        "discard_label",
+        "discard_sigma",
+        "do_split",
+        "do_random",
+        "split_size",
+        "nr_split"
+      ],
+      "Duplicates": [
+        "do_remove_duplicates",
+        "duplicate_threshold",
+        "image_angpix"
+      ],
+      "Filaments": [
+        "do_filaments",
+        "dendrogram_threshold",
+        "dendrogram_minclass"
+      ]
+    },
+    "fields": {
+      "fn_model": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mic": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_data": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_class_ranker": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "rank_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_class_ranker",
+            "value": "Yes"
+          }
+        ]
+      },
+      "select_nr_parts": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_class_ranker",
+            "value": "Yes"
+          }
+        ]
+      },
+      "select_nr_classes": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_class_ranker",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_recenter": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_regroup": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "nr_groups": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_regroup",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_select_values": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "select_label": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_select_values",
+            "value": "Yes"
+          }
+        ]
+      },
+      "select_minval": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_select_values",
+            "value": "Yes"
+          }
+        ]
+      },
+      "select_maxval": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_select_values",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_discard": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "discard_label": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_discard",
+            "value": "Yes"
+          }
+        ]
+      },
+      "discard_sigma": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_discard",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_split": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_random": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_split",
+            "value": "Yes"
+          }
+        ]
+      },
+      "split_size": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_split",
+            "value": "Yes"
+          }
+        ]
+      },
+      "nr_split": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_split",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_remove_duplicates": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "duplicate_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_remove_duplicates",
+            "value": "Yes"
+          }
+        ]
+      },
+      "image_angpix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_remove_duplicates",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_filaments": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "dendrogram_threshold": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_filaments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "dendrogram_minclass": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_filaments",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_queue": {
+        "toggle": "TOGGLE_ALWAYS_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {
+      "do_queue": "No"
+    }
+  },
+  {
+    "id": 21,
+    "label": "relion.ctfrefine",
+    "name": "CTF refinement",
+    "tabs": {
+      "I/O": [
+        "fn_data",
+        "fn_post"
+      ],
+      "Fit": [
+        "do_aniso_mag",
+        "do_ctf",
+        "do_defocus",
+        "do_astig",
+        "do_bfactor",
+        "do_phase",
+        "do_tilt",
+        "do_trefoil",
+        "do_4thorder",
+        "minres"
+      ]
+    },
+    "fields": {
+      "fn_data": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_post": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_aniso_mag": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_ctf": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          }
+        ]
+      },
+      "do_defocus": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          },
+          {
+            "key": "do_ctf",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_astig": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          },
+          {
+            "key": "do_ctf",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_bfactor": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          },
+          {
+            "key": "do_ctf",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_phase": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          },
+          {
+            "key": "do_ctf",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_tilt": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          }
+        ]
+      },
+      "do_trefoil": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          },
+          {
+            "key": "do_tilt",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_4thorder": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_aniso_mag",
+            "value": "No"
+          }
+        ]
+      },
+      "minres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 20,
+    "label": "relion.polish",
+    "name": "Bayesian polishing",
+    "tabs": {
+      "I/O": [
+        "fn_mic",
+        "fn_data",
+        "fn_post",
+        "first_frame",
+        "last_frame",
+        "extract_size",
+        "rescale",
+        "do_float16"
+      ],
+      "Train/Polish": [
+        "do_param_optim",
+        "do_polish",
+        "eval_frac",
+        "optim_min_part",
+        "opt_params",
+        "do_own_params",
+        "sigma_vel",
+        "sigma_div",
+        "sigma_acc",
+        "minres",
+        "maxres"
+      ]
+    },
+    "fields": {
+      "fn_mic": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_data": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_post": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "first_frame": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "last_frame": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "extract_size": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "rescale": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_float16": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_param_optim": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "eval_frac": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_param_optim",
+            "value": "Yes"
+          }
+        ]
+      },
+      "optim_min_part": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_param_optim",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_polish": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "opt_params": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_own_params": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          }
+        ]
+      },
+      "sigma_vel": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          },
+          {
+            "key": "do_own_params",
+            "value": "Yes"
+          }
+        ]
+      },
+      "sigma_div": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          },
+          {
+            "key": "do_own_params",
+            "value": "Yes"
+          }
+        ]
+      },
+      "sigma_acc": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          },
+          {
+            "key": "do_own_params",
+            "value": "Yes"
+          }
+        ]
+      },
+      "minres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          }
+        ]
+      },
+      "maxres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_polish",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 22,
+    "label": "dynamight",
+    "name": "DynaMight flexibility",
+    "tabs": {
+      "I/O": [
+        "fn_star",
+        "fn_map",
+        "fn_mask",
+        "nr_gaussians",
+        "initial_threshold",
+        "reg_factor",
+        "fn_dynamight_exe",
+        "gpu_id",
+        "do_preload"
+      ],
+      "Tasks": [
+        "fn_checkpoint",
+        "do_visualize",
+        "halfset",
+        "do_inverse",
+        "nr_epochs",
+        "do_store_deform",
+        "do_reconstruct",
+        "backproject_batchsize"
+      ]
+    },
+    "fields": {
+      "fn_star": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_map": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "nr_gaussians": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "initial_threshold": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "reg_factor": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_dynamight_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "gpu_id": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_preload": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "fn_checkpoint": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "do_visualize": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "halfset": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_visualize",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_inverse": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "nr_epochs": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_inverse",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_store_deform": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_inverse",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_reconstruct": {
+        "toggle": "TOGGLE_REACTIVATE",
+        "when": []
+      },
+      "backproject_batchsize": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_reconstruct",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 12,
+    "label": "relion.maskcreate",
+    "name": "Mask creation",
+    "tabs": {
+      "I/O": [
+        "fn_in"
+      ],
+      "Mask": [
+        "lowpass_filter",
+        "angpix",
+        "inimask_threshold",
+        "extend_inimask",
+        "width_mask_edge"
+      ],
+      "Helix": [
+        "do_helix",
+        "helical_z_percentage"
+      ]
+    },
+    "fields": {
+      "fn_in": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "lowpass_filter": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "angpix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "inimask_threshold": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "extend_inimask": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "width_mask_edge": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_helix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "helical_z_percentage": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_helix",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 13,
+    "label": "relion.joinstar",
+    "name": "Join star files",
+    "tabs": {
+      "particles": [
+        "do_part",
+        "fn_part1",
+        "fn_part2",
+        "fn_part3",
+        "fn_part4"
+      ],
+      "micrographs": [
+        "do_mic",
+        "fn_mic1",
+        "fn_mic2",
+        "fn_mic3",
+        "fn_mic4"
+      ],
+      "movies": [
+        "do_mov",
+        "fn_mov1",
+        "fn_mov2",
+        "fn_mov3",
+        "fn_mov4"
+      ]
+    },
+    "fields": {
+      "do_part": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_part1": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_part",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_part2": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_part",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_part3": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_part",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_part4": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_part",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_mic": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mic1": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mic",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mic2": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mic",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mic3": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mic",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mic4": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mic",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_mov": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mov1": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mov",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mov2": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mov",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mov3": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mov",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mov4": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_mov",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 14,
+    "label": "relion.subtract",
+    "name": "Particle subtraction",
+    "tabs": {
+      "I/O": [
+        "fn_opt",
+        "fn_mask",
+        "do_data",
+        "fn_data",
+        "do_float16",
+        "do_fliplabel",
+        "fn_fliplabel"
+      ],
+      "Centering": [
+        "do_center_mask",
+        "do_center_xyz",
+        "center_x",
+        "center_y",
+        "center_z",
+        "new_box"
+      ]
+    },
+    "fields": {
+      "fn_opt": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_data": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_data": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_data",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_float16": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_fliplabel": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_fliplabel": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_fliplabel",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_center_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_center_xyz": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_center_mask",
+            "value": "No"
+          }
+        ]
+      },
+      "center_x": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_center_mask",
+            "value": "No"
+          },
+          {
+            "key": "do_center_xyz",
+            "value": "Yes"
+          }
+        ]
+      },
+      "center_y": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_center_mask",
+            "value": "No"
+          },
+          {
+            "key": "do_center_xyz",
+            "value": "Yes"
+          }
+        ]
+      },
+      "center_z": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_center_mask",
+            "value": "No"
+          },
+          {
+            "key": "do_center_xyz",
+            "value": "Yes"
+          }
+        ]
+      },
+      "new_box": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 15,
+    "label": "relion.postprocess",
+    "name": "Post-processing",
+    "tabs": {
+      "I/O": [
+        "fn_in",
+        "fn_mask",
+        "angpix"
+      ],
+      "Sharpen": [
+        "do_auto_bfac",
+        "autob_lowres",
+        "do_adhoc_bfac",
+        "adhoc_bfac",
+        "do_skip_fsc_weighting",
+        "low_pass",
+        "fn_mtf",
+        "mtf_angpix"
+      ]
+    },
+    "fields": {
+      "fn_in": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "angpix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "do_auto_bfac": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "autob_lowres": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_auto_bfac",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_adhoc_bfac": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "adhoc_bfac": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_adhoc_bfac",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_skip_fsc_weighting": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "low_pass": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_skip_fsc_weighting",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mtf": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "mtf_angpix": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 16,
+    "label": "relion.localres",
+    "name": "Local resolution",
+    "tabs": {
+      "I/O": [
+        "fn_in",
+        "fn_mask",
+        "angpix"
+      ],
+      "ResMap / RELION": [
+        "do_resmap_locres",
+        "fn_resmap",
+        "pval",
+        "minres",
+        "maxres",
+        "stepres",
+        "do_relion_locres",
+        "locres_sampling",
+        "randomize_at",
+        "adhoc_bfac",
+        "fn_mtf"
+      ]
+    },
+    "fields": {
+      "fn_in": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_mask": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "angpix": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_resmap_locres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_resmap": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_resmap_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "pval": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_resmap_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "minres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_resmap_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "maxres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_resmap_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "stepres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_resmap_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "do_relion_locres": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "adhoc_bfac": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_relion_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "fn_mtf": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_relion_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "locres_sampling": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_relion_locres",
+            "value": "Yes"
+          }
+        ]
+      },
+      "randomize_at": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": [
+          {
+            "key": "do_relion_locres",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {
+      "angpix": "-1"
+    }
+  },
+  {
+    "id": 23,
+    "label": "modelangelo",
+    "name": "ModelAngelo building",
+    "tabs": {
+      "I/O": [
+        "fn_map",
+        "p_seq",
+        "d_seq",
+        "r_seq",
+        "fn_modelangelo_exe",
+        "gpu_id"
+      ],
+      "Hmmer": [
+        "do_hhmer",
+        "fn_lib",
+        "alphabet",
+        "F1",
+        "F2",
+        "F3",
+        "E"
+      ]
+    },
+    "fields": {
+      "fn_map": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "p_seq": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "d_seq": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "r_seq": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "fn_modelangelo_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "gpu_id": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "do_hhmer": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "fn_lib": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      },
+      "alphabet": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      },
+      "F1": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      },
+      "F2": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      },
+      "F3": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      },
+      "E": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": [
+          {
+            "key": "do_hhmer",
+            "value": "Yes"
+          }
+        ]
+      }
+    },
+    "overrides": {}
+  },
+  {
+    "id": 99,
+    "label": "relion.external",
+    "name": "External",
+    "tabs": {
+      "Input": [
+        "fn_exe",
+        "in_mov",
+        "in_mic",
+        "in_part",
+        "in_coords",
+        "in_3dref",
+        "in_mask"
+      ],
+      "Params": [
+        "param1_label",
+        "param1_value",
+        "param2_label",
+        "param2_value",
+        "param3_label",
+        "param3_value",
+        "param4_label",
+        "param4_value",
+        "param5_label",
+        "param5_value",
+        "param6_label",
+        "param6_value",
+        "param7_label",
+        "param7_value",
+        "param8_label",
+        "param8_value",
+        "param9_label",
+        "param9_value",
+        "param10_label",
+        "param10_value"
+      ]
+    },
+    "fields": {
+      "fn_exe": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_mov": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_mic": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_part": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_coords": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_3dref": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "in_mask": {
+        "toggle": "TOGGLE_DEACTIVATE",
+        "when": []
+      },
+      "param1_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param1_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param2_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param2_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param3_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param3_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param4_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param4_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param5_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param5_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param6_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param6_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param7_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param7_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param8_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param8_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param9_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param9_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param10_label": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      },
+      "param10_value": {
+        "toggle": "TOGGLE_LEAVE_ACTIVE",
+        "when": []
+      }
+    },
+    "overrides": {}
+  }
+]

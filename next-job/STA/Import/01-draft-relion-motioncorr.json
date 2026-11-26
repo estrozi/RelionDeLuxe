@@ -1,0 +1,13 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.importtomo",
+  "action": "draft",
+  "target": "relion.motioncorr",
+  "when": {
+    "not": {
+      "field": "values.images_are_motion_corrected",
+      "equals": "Yes"
+    }
+  }
+}

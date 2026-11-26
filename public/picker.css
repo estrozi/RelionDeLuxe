@@ -1,0 +1,42 @@
+:root{font:13px system-ui;color:#192a3b;background:#f6f8fa;--panel:#fff;--line:#aab5c0;--accent:#2373a1}*{box-sizing:border-box}body{margin:0;height:100dvh;display:flex;flex-direction:column}header,.controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}header span{flex:1}.controls label{display:flex;align-items:center;gap:5px}input{width:78px}input,button{font:inherit;padding:6px;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:4px}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}#status{padding:0 18px}main{display:grid;grid-template-columns:260px minmax(0,1fr);flex:1;min-height:0}aside{overflow:auto;padding:12px;border-right:1px solid var(--line)}#view{overflow:auto;background:#101010;position:relative}#image{display:block;cursor:crosshair}#mics button{display:block;width:100%;text-align:left;overflow-wrap:anywhere;margin-bottom:5px;font-size:11px}#mics button.active{outline:2px solid var(--accent)}#ctf{width:100%;height:auto}html[data-theme=dark]{color:#edf3fa;background:#18232f;--panel:#243444;--line:#526170;--accent:#65b9de;color-scheme:dark}html[data-theme=brazil]{background:#fff7c2;color:#164b2c;--panel:#fffef1;--accent:#168444}html[data-theme=france]{background:#eef3fc;color:#16356c;--accent:#173f96}[hidden]{display:none!important}
+
+/* The sidebar itself stays stationary; only the micrograph list scrolls. */
+body{overflow:hidden}
+.picker-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;padding:6px 10px;border-bottom:1px solid var(--line);flex-shrink:0}
+.picker-toolbar header,.picker-toolbar .controls{padding:0;border:0;gap:6px 10px}
+.picker-toolbar header{flex:1 1 440px;min-width:0}
+.picker-toolbar header strong{font-size:12px;white-space:nowrap}
+.picker-toolbar #job{min-width:80px;overflow-wrap:anywhere;font-size:11px}
+.picker-toolbar .controls{flex:1 1 620px;font-size:12px}
+.picker-toolbar input{width:66px;min-width:0}
+.picker-toolbar input,.picker-toolbar button{padding:3px 5px}
+#status{margin:0;padding:4px 10px;font-size:12px;flex-shrink:0}
+#status:empty{display:none}
+main{overflow:hidden}
+aside{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:8px;gap:6px}
+.ctf-panel{flex:0 1 auto;min-height:0;max-height:45%;overflow:auto}
+.ctf-panel h3{margin:0 0 5px;font-size:12px}
+#ctf{display:block;width:auto;max-width:100%;max-height:22dvh;object-fit:contain;margin:0 auto}
+#ctf-status{margin:4px 0;font-size:11px}
+#ctf-status:empty{display:none}
+#picking-help{margin:0;font-size:11px;flex-shrink:0}
+#mics{flex:1 1 0;min-height:0;overflow:auto;overscroll-behavior:contain;padding:3px}
+@media(max-width:650px){main{grid-template-columns:minmax(150px,34%) minmax(0,1fr)}.picker-toolbar{gap:5px}.picker-toolbar header,.picker-toolbar .controls{flex-basis:100%}.picker-toolbar label{font-size:11px}}
+
+#mics button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center}.mic-name{min-width:0;overflow-wrap:anywhere}.mic-defocus{white-space:nowrap;font-size:10px;font-variant-numeric:tabular-nums;opacity:.85}
+
+#status.working{display:flex;align-items:center;gap:8px;background:var(--panel)}
+#status.working::before{content:"";width:13px;height:13px;flex:0 0 13px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:picker-wait .8s linear infinite}
+@keyframes picker-wait{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#status.working::before{animation:none}}
+
+#particle-quality{flex:0 1 auto;max-height:40%;min-height:0;overflow:auto;border-top:1px solid var(--line);padding-top:5px}
+#particle-quality h3{font-size:12px;margin:0 0 4px}
+#quality-plot{width:100%;height:auto;display:block}
+.quality-actions{display:flex;flex-wrap:wrap;gap:4px}
+.quality-actions button{font-size:10px;padding:3px}
+.quality-thresholds{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:3px;font-size:10px}
+.quality-thresholds input{width:100%;min-width:0;padding:2px}
+#quality-status{font-size:10px;margin:4px 0}
+
+.controls label[hidden]{display:none}

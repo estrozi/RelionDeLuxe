@@ -1,0 +1,27 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {jobInfoEnricher} from '../lib/job-key-info.mjs';
+const index=files=>'data_global\nloop_\n_rlnTomoName\n_rlnTomoTiltSeriesStarFile\n'+files.map((f,i)=>`TS${i} ${f}`).join('\n')+'\n';
+const tilts=values=>'data_tilts\nloop_\n_rlnMicrographName\n_rlnDefocusU\n'+values.map((v,i)=>`mic${i}.mrc ${v}`).join('\n')+'\n';
+test('STA CTF aggregates linked series and exclusion counts input minus output including whole series removal',async t=>{
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'tomo-summary-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const write=async(f,text)=>{await fs.mkdir(path.dirname(path.join(root,f)),{recursive:true});await fs.writeFile(path.join(root,f),text);};
+ const ctf='CtfFind/job003/',exclude='ExcludeTiltImages/job004/';
+ await write(ctf+'job.star','data_joboptions\nloop_\n_rlnJobOptionVariable\n_rlnJobOptionValue\nuse_given_ps No\n');
+ await write(exclude+'job.star','data_joboptions\nloop_\n_rlnJobOptionVariable\n_rlnJobOptionValue\nin_tiltseries '+ctf+'tilt_series_ctf.star\n');
+ await write(ctf+'tilt_series_ctf.star',index([ctf+'tilt_series/A.star',ctf+'tilt_series/B.star']));
+ await write(ctf+'tilt_series/A.star',tilts([8300,13100]));
+ await write(ctf+'tilt_series/B.star',tilts([20000,35000,'nan']));
+ await write(exclude+'selected_tilt_series.star',index([exclude+'tilt_series/A.star']));
+ await write(exclude+'tilt_series/A.star',tilts([8300]));
+ const enrich=jobInfoEnricher(root,[{id:3,name:'CTF estimation'},{id:57,name:'Exclude tilt-images'}]);
+ const state=()=>({jobs:[{name:ctf,type:3,status:'Succeeded',outputs:[ctf+'tilt_series_ctf.star']},{name:exclude,type:57,status:'Succeeded',outputs:[exclude+'selected_tilt_series.star']}]});
+ let result=await enrich(state());assert.equal(result.jobs[0].keyInfo,'0.8μm-3.5μm');assert.equal(result.jobs[1].keyInfo,'4/5 excluded');
+ await write(ctf+'tilt_series/B.star',tilts([20000,45000,'nan']));
+ result=await enrich(state());assert.equal(result.jobs[0].keyInfo,'0.8μm-4.5μm');
+ await write(exclude+'tilt_series/A.star',tilts([8300,13100]));
+ assert.equal((await enrich(state())).jobs[1].keyInfo,'3/5 excluded');
+});

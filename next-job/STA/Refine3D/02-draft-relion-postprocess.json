@@ -1,0 +1,13 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.refine3d",
+  "action": "draft",
+  "target": "relion.postprocess",
+  "when": {
+    "not": {
+      "field": "context.refinementMask",
+      "empty": true
+    }
+  }
+}

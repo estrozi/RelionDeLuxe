@@ -1,0 +1,41 @@
+:root{font:13px system-ui;color:#192a3b;background:#f6f8fa;--panel:#e5eaf0;--border:#bac6d0}
+*{box-sizing:border-box}body{margin:0;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:12px;padding:8px 12px;flex-wrap:wrap}header>span:first-of-type{font-size:11px;border:1px solid var(--border);padding:2px 6px;border-radius:10px}#file{overflow-wrap:anywhere;min-width:0}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 12px;background:var(--panel);flex-shrink:0}
+label,#pick-controls{display:inline-flex;align-items:center;gap:5px}select,input,button{font:inherit}select{padding:4px;max-width:min(400px,70vw)}input[type=range]{width:110px}#depth{width:55px}#slice{width:160px}
+#status,#warning{margin:0;padding:5px 12px;flex-shrink:0}#warning{color:#aa3800}#viewport{flex:1;min-height:0;min-width:0;overflow:auto;background:#111;position:relative}
+#image{position:relative;margin:0;display:none}canvas{display:block;position:absolute;left:0;top:0;width:100%;height:100%}#overlay{pointer-events:none}footer{padding:5px 12px;flex-shrink:0}
+[hidden]{display:none!important}
+html[data-theme=dark]{color:#edf3fa;background:#18232f;--panel:#243444;--border:#6c7b88}html[data-theme=dark] select,html[data-theme=dark] input[type=number]{color:inherit;background:#18232f}html[data-theme=dark] #warning{color:#ffbc7e}
+html[data-theme=brazil]{color:#164b2c;background:#fff7c2;--panel:#e7efb0}html[data-theme=france]{color:#16356c;background:#eef3fc;--panel:#dce8fc}
+
+.tomo-edit-controls input[type=number]{width:65px}.tomo-edit-controls #support-help{flex-basis:100%;font-size:11px}.tomo-edit-controls{max-height:30vh;overflow:auto}#density{cursor:crosshair}
+
+.support-menu-trigger{display:inline-flex;align-items:center;gap:7px;min-width:145px;padding:5px 8px;color:inherit;background:var(--panel);border:1px solid var(--border);border-radius:4px}
+.support-menu-trigger::after{content:'▾';margin-left:auto}.support-menu-trigger:disabled{opacity:.55}
+.support-swatch{display:inline-block;flex:none;width:13px;height:13px;border:1px solid #555;border-radius:50%;box-shadow:0 0 0 1px #ffffff80}
+.support-swatch.empty{background:transparent;border-style:dashed}
+.support-menu{position:fixed;z-index:1000;overflow:auto;padding:4px;color:inherit;background:var(--panel);border:1px solid var(--border);border-radius:5px;box-shadow:0 6px 20px #0005}
+.support-menu [role=option]{display:flex;align-items:center;gap:8px;padding:7px 9px;cursor:pointer;border-radius:3px;outline-offset:-2px}
+.support-menu [role=option][aria-selected=true]{font-weight:700;border-inline-start:3px solid currentColor;padding-inline-start:6px}
+.support-menu [role=option]:hover,.support-menu [role=option]:focus{background:#80808030;outline:2px solid #438ac2}
+
+.sphere-probe{position:fixed;right:12px;bottom:12px;width:512px;height:512px;min-width:200px;min-height:200px;max-width:95vw;max-height:90vh;resize:both;overflow:auto;z-index:50;background:var(--panel);border:1px solid var(--border);border-radius:6px;box-shadow:0 3px 15px #0006;display:flex;flex-direction:column;padding:6px;gap:5px}
+.probe-title{display:flex;justify-content:space-between;align-items:center;cursor:move;touch-action:none;flex-shrink:0}
+.probe-image{position:relative;flex:1;min-height:65px;background:#111;display:flex;align-items:center}
+.probe-image canvas{position:static;width:100%;height:auto;max-height:100%;object-fit:contain;aspect-ratio:2}
+.probe-status,.sphere-probe small{font-size:10px;overflow-wrap:anywhere}
+
+.probe-poles{display:flex;justify-content:center;align-items:center;gap:10px;flex-shrink:0;font-size:11px}.probe-poles label{gap:2px}.probe-poles input{margin:0}
+
+.probe-poles{flex-wrap:wrap;gap:4px 8px}.probe-poles>span{flex-basis:100%;text-align:center}.probe-particles{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:11px;flex-shrink:0}.probe-step{width:46px}.probe-particles button{padding:1px 5px}
+
+.sphere-probe .probe-status{height:42px;flex-shrink:0;overflow:auto}.sphere-probe .probe-image{flex-basis:0}
+
+.probe-ticks{align-self:center;max-width:100%;display:flex;justify-content:space-between;gap:3px;font-size:10px;flex-shrink:0}
+
+.probe-title strong{margin-right:auto}
+.probe-title{gap:5px}
+.probe-minimize{flex-shrink:0;padding:1px 6px;min-width:24px;font-size:16px;line-height:1.2}
+.sphere-probe.minimized{width:200px!important;height:auto!important;min-height:0;resize:none;overflow:hidden}
+.sphere-probe.minimized>:not(.probe-title),.sphere-probe.minimized .probe-update{display:none}

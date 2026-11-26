@@ -1,0 +1,11 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.refine3d",
+  "action": "draft",
+  "target": "dynamight",
+  "when": {"all": [
+    {"field": "job.status", "equals": "Succeeded"},
+    {"field": "job.resolutionAngstrom", "atMost": 3}
+  ]}
+}

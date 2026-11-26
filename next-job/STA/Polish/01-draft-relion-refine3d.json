@@ -1,0 +1,7 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.framealigntomo",
+  "action": "draft",
+  "target": "relion.refine3d"
+}

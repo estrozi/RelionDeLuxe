@@ -1,0 +1,30 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';
+import {settingsStar} from '../lib/settings.mjs';
+import {NativeAdapter} from '../lib/native.mjs';
+import {tomoEditorInput,readTomoEditor,saveTomoEditor} from '../lib/tomo-editor.mjs';
+const bridge=process.env.RELIONDELUXE_TEST_BRIDGE;
+test('denoised-only input is validated, registered and continued without changing annotations',{skip:!bridge},async t=>{
+ const project=await fs.mkdtemp(path.join(os.tmpdir(),'browser-tomo-'));t.after(()=>fs.rm(project,{recursive:true,force:true}));
+ const adapter=new NativeAdapter(project,path.resolve(bridge),{...process.env,PATH:'',RELIONDELUXE_MODE:'tomo'});
+ await adapter.call(['init']);
+ const schema=(await adapter.call(['schema'])).find(s=>s.id===59),layout=JSON.parse(await fs.readFile(new URL('../public/layout-tomo.json',import.meta.url),'utf8')).find(l=>l.id===59);
+ const h=Buffer.alloc(1024+4*4*4*4);for(const o of [0,4,8,28,32,36])h.writeInt32LE(4,o);h.writeInt32LE(2,12);for(const o of [40,44,48])h.writeFloatLE(40,o);await fs.writeFile(path.join(project,'denoised.mrc'),h);
+ const input='data_global\n\nloop_\n_rlnTomoName #1\n_rlnTomoReconstructedTomogramDenoised #2\nT denoised.mrc\n';await fs.writeFile(path.join(project,'tomograms.star'),input);
+ const values={...Object.fromEntries(schema.options.map(f=>[f.key,f.default])),in_tomoset:'tomograms.star',in_star_file:'',pick_mode:'spheres',do_queue:'No'};
+ if((await adapter.call(['capabilities'])).relionVersion.startsWith('5.1')){await fs.writeFile(path.join(project,'native-settings.star'),settingsStar(layout,schema,values));await assert.rejects(adapter.call(['preview','native-settings.star','','']),/does not contain the label rlnTomoReconstructedTomogram/);}
+ const context=await tomoEditorInput(project,[],values);assert.deepEqual(context.volumeGeometry.T.dimensions,[4,4,4]);
+ const preview=await adapter.submit('preview',layout,schema,values,'','');assert.equal(preview.browserTomo,true);assert.equal(preview.inputs[0].name,'tomograms.star');assert.deepEqual(preview.missing,[]);
+ const created=await adapter.submit('browser-tomo',layout,schema,values,'','');assert.equal(created.name,'Picks/job001/');
+ const jobFile=async name=>path.join(project,created.name,name),state=await adapter.call(['state']);assert.equal(state.jobs[0].status,'Running');assert.equal(state.counter,2);
+ assert.deepEqual(state.jobs[0].inputs,['tomograms.star']);assert.ok(state.jobs[0].outputs.includes('Picks/job001/optimisation_set.star'));
+ const initial=await readTomoEditor(jobFile,context);await saveTomoEditor(jobFile,context,{revision:initial.revision,supports:[{id:1,type:'particles',tomogram:'T',points:[[0,0,0],[1,0,0]],excludedSamples:[1]}]},{finish:true,job:created.name});
+ const names=['browser-tomo-supports.json','particles.star','optimisation_set.star'],before=await Promise.all(names.map(async n=>fs.readFile(await jobFile(n))));
+ await adapter.call(['mark-success',created.name]);await fs.writeFile(await jobFile('RELION_JOB_EXIT_SUCCESS'),'');
+ const continued=await adapter.submit('browser-tomo',layout,schema,values,created.name,'');assert.equal(continued.name,created.name);
+ for(let i=0;i<names.length;i++)assert.deepEqual(await fs.readFile(await jobFile(names[i])),before[i]);
+ assert.equal(await fs.readFile(path.join(project,'tomograms.star'),'utf8'),input);
+ const after=await adapter.call(['state']);assert.equal(after.counter,2);assert.equal(after.jobs.length,1);assert.equal(after.jobs[0].status,'Running');
+ await assert.rejects(fs.access(await jobFile('RELION_JOB_EXIT_SUCCESS')));
+ await assert.rejects(adapter.submit('browser-tomo',layout,schema,values,created.name,''),/running job/);
+ await fs.unlink(path.join(project,'denoised.mrc'));await assert.rejects(tomoEditorInput(project,[],values));
+});

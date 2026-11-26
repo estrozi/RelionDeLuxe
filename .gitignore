@@ -1,0 +1,12 @@
+build/
+relion-source/
+node_modules/
+*.o
+.reliondeluxe/
+
+.test-tmp/
+*.zip
+*.log
+__pycache__/
+.env
+.env.*

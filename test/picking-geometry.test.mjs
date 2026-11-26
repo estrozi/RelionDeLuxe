@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateFilaments,removePick} from '../public/picking-geometry.js';
+test('Filaments need complete distinct endpoint pairs',()=>{validateFilaments([]);validateFilaments([{x:1,y:2},{x:3,y:4}]);assert.throws(()=>validateFilaments([{x:1,y:2}]),/second click/);assert.throws(()=>validateFilaments([{x:1,y:2},{x:1,y:2}]),/distinct/);});
+test('Deleting either endpoint preserves other pairings and handles a pending start',()=>{for(const index of [0,1]){const points=[0,1,2,3,4];removePick(points,index,true);assert.deepEqual(points,[2,3,4]);}const points=[0,1,2];removePick(points,2,true);assert.deepEqual(points,[0,1]);removePick(points,0,false);assert.deepEqual(points,[1]);});

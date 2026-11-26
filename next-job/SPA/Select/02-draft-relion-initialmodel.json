@@ -1,0 +1,23 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.select",
+  "action": "draft",
+  "target": "relion.initialmodel",
+  "when": {
+    "all": [
+      {
+        "not": {
+          "field": "context.subset3D",
+          "equals": true
+        }
+      },
+      {
+        "not": {
+          "field": "values.fn_model",
+          "empty": true
+        }
+      }
+    ]
+  }
+}

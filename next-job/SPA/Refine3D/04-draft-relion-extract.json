@@ -1,0 +1,11 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.refine3d",
+  "action": "draft",
+  "target": "relion.extract",
+  "when": {"all": [
+    {"field": "job.status", "equals": "Succeeded"},
+    {"field": "context.nearNyquist", "equals": true}
+  ]}
+}

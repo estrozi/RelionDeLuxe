@@ -1,0 +1,21 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.autopick",
+  "action": "continue-manual",
+  "when": {
+    "all": [
+      {
+        "field": "job.status",
+        "equals": "Succeeded"
+      },
+      {
+        "not": {
+          "field": "context.topazTraining",
+          "equals": true
+        }
+      }
+    ]
+  },
+  "label": "Continue manually"
+}

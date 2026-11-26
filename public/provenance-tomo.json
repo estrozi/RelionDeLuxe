@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/3dem/relion",
+  "branch": "ver5.0",
+  "commit": "210f68c865b28e6806c6b721f1a6ed3374c788d2",
+  "mode": "STA",
+  "jobs": 24,
+  "fields": 619
+}

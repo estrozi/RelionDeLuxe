@@ -1,0 +1,7 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.maskcreate",
+  "action": "draft",
+  "target": "relion.postprocess"
+}

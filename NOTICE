@@ -1,0 +1,54 @@
+RelionDeLuxe — independent browser GUI add-on.
+
+RELION source: https://github.com/3dem/relion
+Branch: ver5.0
+Revision: 210f68c865b28e6806c6b721f1a6ed3374c788d2
+Version in src/macros.h: 5.0.1
+
+The generated option catalog and GUI layout derive from:
+  src/pipeline_jobs.cpp, src/pipeline_jobs.h
+  src/gui_jobwindow.cpp, src/gui_jobwindow.h, src/gui_mainwindow.cpp
+Original author notices identify Sjors H.W. Scheres,
+MRC Laboratory of Molecular Biology, and other RELION contributors.
+
+The bridge compiles original upstream pipeline and metadata source files,
+without modifying their algorithms. All original notices remain in that
+source checkout. This distribution provides source for the new bridge;
+it does not redistribute RELION scientific executables.
+
+Original source notice:
+
+Author: "Sjors H.W. Scheres"
+MRC Laboratory of Molecular Biology
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+This complete copyright notice must be included in any revised version of the
+source code. Additional authorship citations may be added, but existing
+author citations must be preserved.
+
+NGL 2.5.0 (MIT) is bundled at public/vendor/ngl.js for local volume visualization.
+Source: https://github.com/nglviewer/ngl
+Distribution: npm ngl@2.5.0, tarball SHA-1 2c3560dbad776ee1486d9f399da741f13dbbfccc.
+License: public/vendor/NGL-LICENSE.txt.
+
+Local NGL 2.5.0 patch (0.14.39): CIF parser tolerates absent chem_comp metadata; atom coordinates and source files are unchanged.
+
+Gain TIFF conversion behavioral references:
+  https://github.com/LabShare-Archive/IMOD/blob/master/mrc/tif2mrc.c
+  https://github.com/LabShare-Archive/IMOD/blob/master/libiimod/iitif.c
+  https://github.com/LabShare-Archive/IMOD/blob/master/dist/COPYRIGHT
+IMOD authors: James Kremer and David Mastronarde.
+IMOD copyright: Boulder Laboratory for 3-Dimensional Electron Microscopy
+of Cells (BL3DEMC) and the Regents of the University of Colorado.
+The referenced repository distributes tif2mrc under GPL v2 and its C/C++
+libraries under LGPL. This package contains a new JavaScript implementation;
+it does not redistribute or link libtiff or IMOD executables.

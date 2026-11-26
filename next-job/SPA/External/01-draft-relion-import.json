@@ -1,0 +1,7 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.external.screening",
+  "action": "draft",
+  "target": "relion.import"
+}

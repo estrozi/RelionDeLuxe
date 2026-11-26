@@ -1,0 +1,11 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.select",
+  "action": "draft",
+  "target": "relion.refine3d",
+  "when": {
+    "field": "context.subset3D",
+    "equals": true
+  }
+}

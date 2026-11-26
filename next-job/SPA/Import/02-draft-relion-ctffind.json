@@ -1,0 +1,21 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.import",
+  "action": "draft",
+  "target": "relion.ctffind",
+  "when": {
+    "all": [
+      {
+        "not": {
+          "field": "values.do_other",
+          "equals": "Yes"
+        }
+      },
+      {
+        "field": "context.importMovies",
+        "equals": "No"
+      }
+    ]
+  }
+}

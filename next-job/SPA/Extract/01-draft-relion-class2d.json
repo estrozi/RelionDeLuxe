@@ -1,0 +1,7 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.extract",
+  "action": "draft",
+  "target": "relion.class2d"
+}

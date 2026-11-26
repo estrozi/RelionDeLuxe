@@ -1,0 +1,11 @@
+{
+  "format": "RelionDeLuxe.next-job",
+  "version": 1,
+  "source": "relion.polish",
+  "action": "draft",
+  "target": "relion.polish",
+  "when": {
+    "field": "values.do_param_optim",
+    "equals": "Yes"
+  }
+}

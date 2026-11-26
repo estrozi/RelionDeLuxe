@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3D map · RelionDeLuxe</title><link rel="stylesheet" href="/map-viewer.css"><script defer src="/vendor/ngl.js"></script><script type="module" src="/map-viewer.js"></script></head><body>
+<header><strong>RelionDeLuxe · 3D viewer</strong><span id="filename"></span><label class="theme-picker">Theme<select id="theme"><option value="light">Light</option><option value="dark">Dark</option><option value="brazil">Brazil</option><option value="france">France</option></select></label></header>
+<main><aside>
+<fieldset id="surface-controls" disabled><legend>Map surface</legend>
+<label><input id="map-visible" type="checkbox" checked> Show map</label>
+<label>Threshold (absolute density)<input id="level" type="number" step="any"></label><input id="level-slider" type="range" aria-label="Isosurface threshold">
+<label title="Apply 10 smoothing iterations to the display surface. Does not modify the map."><input id="smooth" type="checkbox"> Smooth surface</label>
+<label>Surface color<input id="color" type="color" value="#65b9de"></label>
+<label>Transparency <output id="alpha-value">0%</output><input id="alpha" type="range" min="0" max="100" value="0"></label></fieldset>
+<fieldset id="resolution-controls" hidden><legend>Local resolution</legend>
+<label><input id="resolution-enabled" type="checkbox" checked disabled> Color surface by local resolution</label>
+<label>Blue limit (Å, higher resolution)<input id="resolution-min" type="number" min="0.001" step="any" disabled></label>
+<label>Red limit (Å, lower resolution)<input id="resolution-max" type="number" min="0.001" step="any" disabled></label>
+<div class="resolution-gradient" aria-hidden="true"></div><output id="resolution-legend"></output>
+<p id="resolution-message" role="status">Loading local-resolution map…</p><small id="resolution-file"></small></fieldset>
+<fieldset><legend>View</legend><label>Background<input id="background" type="color" value="#18232f"></label><label>Camera<select id="camera"><option value="orthographic">Orthographic</option><option value="perspective">Perspective</option></select></label><div class="clip-control"><span>Clipping planes</span><div class="clip-slider"><input id="clip-near" type="range" min="0" max="100" step="1" value="0" aria-label="Near clipping plane"><input id="clip-far" type="range" min="0" max="100" step="1" value="100" aria-label="Far clipping plane"></div><output id="clip-values">Near 0% · Far 100%</output></div><button id="center">Center visible objects</button></fieldset>
+<fieldset id="angular-controls" hidden><legend>Angular distribution</legend><label><input id="angular-visible" type="checkbox" checked> Show cylinders</label><small id="angular-file"></small></fieldset><fieldset><legend>Structures</legend><label>Load local PDB / mmCIF files<input id="pdb" type="file" accept=".pdb,.ent,.cif,.mmcif" multiple></label><small>Files stay in this browser. Structures use their original coordinates; no automatic fitting is performed.</small><div id="structures"></div></fieldset>
+<p id="status" role="status">Loading 3D file…</p><small>Drag to rotate · scroll to zoom · right-drag to pan.</small>
+</aside><div id="viewport" aria-label="Interactive 3D map and structures"></div></main></body></html>

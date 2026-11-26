@@ -1,0 +1,42 @@
+name: Release
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/releases/**'
+      - 'package.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify version and package source
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(node -p "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).version")
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          test -f "docs/releases/$version.md"
+          mkdir -p dist
+          git archive --format=zip --prefix="RelionDeLuxe-$version/" HEAD -o "dist/RelionDeLuxe-$version.zip"
+          (cd dist && sha256sum "RelionDeLuxe-$version.zip" > SHA256SUMS)
+          echo "RELEASE_VERSION=$version" >> "$GITHUB_ENV"
+      - name: Publish source prerelease with known limitations
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          gh release create "v$RELEASE_VERSION" \
+            "dist/RelionDeLuxe-$RELEASE_VERSION.zip" dist/SHA256SUMS \
+            --target "$RELEASE_COMMIT" --prerelease \
+            --title "RelionDeLuxe $RELEASE_VERSION (prerelease)" \
+            --notes-file "docs/releases/$RELEASE_VERSION.md"
