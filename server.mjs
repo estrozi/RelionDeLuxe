@@ -63,7 +63,7 @@ import {jobInfoEnricher} from './lib/job-key-info.mjs';
 import {ctfPowerSpectra} from './lib/ctf-power-spectra.mjs';
 import {fieldError} from './lib/field-errors.mjs';
 import {validateFilaments} from './public/picking-geometry.js';
-import {pickerCounts,pickerRawImage,resumeManualPicker,supportsPicker,pickerSnapshot,pickerCoordinates,pickerImage,coordinateName,coordinateText} from './lib/browser-picker.mjs';
+import {autopickReadOnlySnapshot,pickerCounts,pickerRawImage,resumeManualPicker,supportsPicker,pickerSnapshot,pickerCoordinates,pickerImage,coordinateName,coordinateText} from './lib/browser-picker.mjs';
 import {browserSelection,selectionSnapshot} from './lib/browser-selection.mjs';
 import {openVoxelSampler,optimizeSupport,sphereProbe} from './lib/tomo-optimize.mjs';
 import {tomoEditorInput,readTomoEditor,saveTomoEditor,inVolumeSamples} from './lib/tomo-editor.mjs';
@@ -200,7 +200,7 @@ async function classParticleCounts(manifest){
  const data=await adapter.call(['job',owner]);return await addClassParticleCounts(project,readRoots,manifest,data.values.fn_img);
  }catch(e){return {...manifest,particleCountWarning:'NumberOfParticles unavailable: '+e.message};}
 }
-async function pickingContext(job){const current=await currentJob(job);await fs.access(await jobFile(job,'RELIONDELUXE_BROWSER_PICKING'));const data=await adapter.call(['job',job]);const auto=data.values.continue_manual==='Yes'&&!!data.values.fn_input_autopick;const pickerValues=auto?JSON.parse(await fs.readFile(await jobFile(job,'browser-picking-settings.json'),'utf8')):data.values;const snapshot=await pickerSnapshot(project,readRoots,pickerValues);if(auto)for(const mic of snapshot.mics)mic.mapping='autopick.star';const expected=await fs.readFile(await jobFile(job,'browser-picking-input.txt'),'utf8');if(expected!==snapshot.revision)throw Error('Micrograph input changed; start a new picking job to avoid mismatching coordinates.');return {...snapshot,powerScreening:!!auto,powerWorkers:configurePowerWorkers((await projectDefaults.read()).globalNcpus),writable:!readonly&&current.status==='Running'};}
+async function pickingContext(job,inspect=false){const current=await currentJob(job);if(inspect){if(tomo||current.type!==4)throw Error('Read-only particle inspection requires an Auto-picking job.');const data=await adapter.call(['job',job]);return autopickReadOnlySnapshot(project,readRoots,job,data.values);}await fs.access(await jobFile(job,'RELIONDELUXE_BROWSER_PICKING'));const data=await adapter.call(['job',job]);const auto=data.values.continue_manual==='Yes'&&!!data.values.fn_input_autopick;const pickerValues=auto?JSON.parse(await fs.readFile(await jobFile(job,'browser-picking-settings.json'),'utf8')):data.values;const snapshot=await pickerSnapshot(project,readRoots,pickerValues);if(auto)for(const mic of snapshot.mics)mic.mapping='autopick.star';const expected=await fs.readFile(await jobFile(job,'browser-picking-input.txt'),'utf8');if(expected!==snapshot.revision)throw Error('Micrograph input changed; start a new picking job to avoid mismatching coordinates.');return {...snapshot,powerScreening:!!auto,powerWorkers:configurePowerWorkers((await projectDefaults.read()).globalNcpus),writable:!readonly&&current.status==='Running'};}
 const results=new Map();let mutation=Promise.resolve(),logPreviewBusy=false,ctfPreviewBusy=false;
 async function launch(executable,argv,logName){
  const dir=path.join(project,'.reliondeluxe');await fs.mkdir(dir,{recursive:true,mode:0o700});
@@ -479,7 +479,7 @@ const server=http.createServer(async(req,res)=>{
    }
    if(req.method!=='GET')return json(res,405,{error:'Method not allowed'});
    if(['/api/picking','/api/picking-image','/api/picking-coordinates'].includes(url.pathname)){
-    const job=url.searchParams.get('job'),context=await pickingContext(job);if(url.pathname==='/api/picking')return json(res,200,context);
+    const job=url.searchParams.get('job'),context=await pickingContext(job,url.searchParams.get('readonly')==='1');if(url.pathname==='/api/picking')return json(res,200,context);
     const index=Number(url.searchParams.get('index')),mic=context.mics[index];if(!Number.isInteger(index)||!mic)throw Error('Invalid micrograph');
     if(url.pathname==='/api/picking-coordinates')return json(res,200,await pickerCoordinates(project,readRoots,job,mic));
     const image=await pickerImage(project,readRoots,mic,context.values);res.writeHead(200,{'Content-Type':'application/octet-stream','X-Image-Nx':image.nx,'X-Image-Ny':image.ny});res.end(image.output);return;
@@ -517,7 +517,7 @@ const server=http.createServer(async(req,res)=>{
     const snapshot=await selectionSnapshot(project,readRoots,data.values);snapshot.manifest=await classParticleCounts(snapshot.manifest);
     return json(res,200,{...snapshot,writable:!readonly&&j.status==='Running',job});
    }
-   if(url.pathname==='/api/picking-counts'){const job=url.searchParams.get('job'),context=await pickingContext(job);return json(res,200,{counts:await pickerCounts(project,readRoots,job,context)});}
+   if(url.pathname==='/api/picking-counts'){const job=url.searchParams.get('job'),context=await pickingContext(job,url.searchParams.get('readonly')==='1');return json(res,200,{counts:await pickerCounts(project,readRoots,job,context)});}
    if(url.pathname==='/api/log-preview'){
     const snapshot=await pickerSnapshot(project,readRoots,{fn_in:url.searchParams.get('file'),angpix:'-1'});
     const mic=snapshot.mics.filter(m=>Number.isFinite(m.defocusU)).sort((a,b)=>b.defocusU-a.defocusU)[0];
@@ -598,7 +598,7 @@ const server=http.createServer(async(req,res)=>{
    }
    if(url.pathname==='/api/map-preview'){if(req.method!=='GET')return json(res,405,{error:'Method not allowed'});const input=url.searchParams.get('file'),snapshot=await hasProject()?await adapter.call(['state']):{jobs:[],nodes:[]},mask=isMaskPreview(project,input,snapshot,layout);const map=await openMapPreview(project,readRoots,input);res.writeHead(200,{'Content-Type':'application/octet-stream','Content-Length':map.size,'X-Relion-Map-Kind':mask?'mask':'density'});try{await streamPipeline(map.handle.createReadStream({start:0}),res);}catch{res.destroy();}return;}
    if(url.pathname==='/api/picking-filter-backups'){const job=url.searchParams.get('job');await pickingContext(job);return json(res,200,await particleBackups(project,job));}
-   if(url.pathname==='/api/picking-micrograph-statistics'){const job=url.searchParams.get('job'),context=await pickingContext(job),index=Number(url.searchParams.get('index'));if(!Number.isInteger(index)||!context.mics[index])throw Error('Invalid micrograph');return json(res,200,await micrographStatistics(project,readRoots,context.mics[index]));}
+   if(url.pathname==='/api/picking-micrograph-statistics'){const job=url.searchParams.get('job'),context=await pickingContext(job,url.searchParams.get('readonly')==='1'),index=Number(url.searchParams.get('index'));if(!Number.isInteger(index)||!context.mics[index])throw Error('Invalid micrograph');return json(res,200,await micrographStatistics(project,readRoots,context.mics[index]));}
    if(url.pathname==='/api/picking-statistics'){const job=url.searchParams.get('job'),context=await pickingContext(job);return json(res,200,await workerParticleStatistics(project,readRoots,job,context,Number(url.searchParams.get('index')),url.searchParams.get('diameter')));}
    if(url.pathname==='/api/executable-health')return json(res,200,await executableProbe(url.searchParams.get('key'),url.searchParams.get('value')||'',{cwd:project,force:url.searchParams.get('retry')==='1'}));
    if(url.pathname==='/api/config')return json(res,200,{nextJobs:await loadNextDefinitions(await nextJobRoot(ROOT,project,{seed:!demo&&!readonly&&await hasProject()}),tomo?'tomo':'spa',layout,catalog),version:releaseVersion,relionVersions,executionDefaults:await projectDefaults.read(),executionRevision:await projectDefaults.revision(),executionKeys,cluster,submissionScripts,detectedResources,denoiseDisabledReason,mode:tomo?'tomo':'spa',demo,readonly,debug,project:demo?(tomo?'STA tutorial · demonstration':'SPA tutorial · demonstration'):project,catalog,layout,provenance,initialized:await hasProject()});
