@@ -15,6 +15,8 @@ test('Import defaults use actual extension spelling, including older screening r
   const state={jobs:[{type:1002,status:'Succeeded',name:'External/job001/'}],nodes:[]},layout=[{id:0,name:'Import'}];
   assert.equal((await sequentialDefaults(root,[],state,layout,[],0)).fn_in_raw,'Movies/*.tiff');
   await fs.writeFile(report,JSON.stringify({folder:'Movies',frames:20,extensions:['.TIFF'],extensionCasePreserved:true}));
+  assert.equal((await sequentialDefaults(root,[],state,layout,[],0)).fn_in_raw,'Movies/*.tiff','actual files override a stale report');
+  await fs.rename(path.join(root,'Movies/movie.tiff'),path.join(root,'Movies/movie.TIFF'));
   assert.equal((await sequentialDefaults(root,[],state,layout,[],0)).fn_in_raw,'Movies/*.TIFF');
  }finally{await fs.rm(root,{recursive:true,force:true});}
 });

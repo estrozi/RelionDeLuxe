@@ -9,7 +9,7 @@ test('Mask completion refreshes the editor and stale responses cannot restore Ru
  const noop=()=>{},element={dataset:{}};
  const context={config:{readonly:false},api:()=>new Promise(resolve=>finishRead=resolve),state:initial,type:9,selected:initial.jobs[0].name,workspaceFeed:null,embeddedWorkspace:true,
  current:()=>context.state.jobs[0],showContinuationTools:()=>false,renderEditor:()=>renders++,renderInspector:()=>inspectors++,$:()=>element,
- renderTypes:noop,applySequentialDefaults:noop,highlightPendingInputs:noop,showReferenceResolution:noop,applyAngularSamplingDefault:noop,rememberCompletions:noop,renderPipeline:noop,loadLog:noop};
+ syncExecutionMode:noop,workspaceMissing:false,renderTypes:noop,applySequentialDefaults:noop,highlightPendingInputs:noop,showReferenceResolution:noop,applyAngularSamplingDefault:noop,rememberCompletions:noop,renderPipeline:noop,loadLog:noop};
  vm.createContext(context);
  vm.runInContext(source.slice(source.indexOf('let stateUpdateSerial='),source.indexOf("$('#refresh').onclick")),context);
  const old=context.update();

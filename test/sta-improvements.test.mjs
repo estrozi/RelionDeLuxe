@@ -31,14 +31,14 @@ test('STA executable defaults validate nonempty paths and accept empty overrides
   await settings.write({fn_batchtomo_exe:'',fn_aretomo_exe:''});assert.equal((await settings.read()).fn_aretomo_exe,'');
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
-test('STA compatible defaults reach non-adjacent job types and stop for existing jobs',async()=>{
+test('STA draft defaults reach non-adjacent job types even when an earlier job failed',async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'sta-suggest-'));
  try{
   const file='Import/job001/tilt_series.star',group='TomogramGroupMetadata.star.relion';
   for(const name of [file,'.Nodes/TomogramGroupMetadata/'+file]){await fs.mkdir(path.dirname(path.join(dir,name)),{recursive:true});await fs.writeFile(path.join(dir,name),'');}
   const state={jobs:[{name:'Import/job001/',type:50,status:'Succeeded',alias:'None',outputs:[file]}],nodes:[{name:file,type:group}]};
   assert.deepEqual(await sequentialDefaults(dir,[],state,layout,catalog,2),{input_star_mics:file});
-  state.jobs.push({name:'CtfFind/job002/',type:2,status:'Failed',outputs:[]});assert.deepEqual(await sequentialDefaults(dir,[],state,layout,catalog,2),{});
+  state.jobs.push({name:'CtfFind/job002/',type:2,status:'Failed',outputs:[]});assert.deepEqual(await sequentialDefaults(dir,[],state,layout,catalog,2),{input_star_mics:file});
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
 test('browser frame inference maps single frames to corrected STA images and caches unchanged inputs',async()=>{
@@ -61,4 +61,23 @@ test('STA CTF MPI and cryoCARE defaults reach drafts and portable templates',asy
  assert.equal(resolveResources(l,s,{cryocare_path:'TBD'},globals).cryocare_path,'/local/cryoCARE');
  assert.equal(workstationDefaults(l,s,{},globals).cryocare_path,'/local/cryoCARE');
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'cryocare-default-'));try{const settings=new ProjectDefaults(dir);await settings.write({cryocare_path:dir});assert.equal((await settings.read()).cryocare_path,dir);await assert.rejects(settings.write({cryocare_path:path.join(dir,'missing')}),/directory does not exist/);await settings.write({cryocare_path:''});assert.equal((await settings.read()).cryocare_path,'');}finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+test('frame hints apply only finite mdoc doses and preserve explicit edits',async()=>{
+ const vm=await import('node:vm'),source=await fs.readFile(new URL('../public/app.js',import.meta.url),'utf8');
+ const chunk=source.slice(source.indexOf('let frameRevision=0;'),source.indexOf('const importCounts='));
+ for(const [metadata,initial,edited,expected] of [[null,'',false,''],[{},'',false,''],[{dose:null},'',false,''],[{error:'unreadable'},'',false,''],[{dose:NaN},'',false,''],[{dose:2.5},'',false,'2.5'],[{dose:0},'',false,'0'],[{dose:2.5},'7',false,'7'],[{dose:2.5},'',true,'']]){
+  const values={movie_files:'input/*.mrc',dose_rate:initial,...(metadata?{mdoc_files:'input/*.mdoc'}:{})},input={isConnected:true,oninput(){}},dose={value:initial};
+  const context={values,type:50,selected:null,currentLayout:()=>({name:'Import tilt series'}),disabledField:()=>false,$:s=>s==='#f-images_are_motion_corrected'?input:s==='#f-dose_rate'?dose:null,api:async route=>route.startsWith('mdoc-info')?metadata:{frames:1},syncDisabled(){},URLSearchParams,schema:()=>({options:[{key:'dose_rate',default:''}]}),drafts:new Map(),editedInputDefaults:new Map(edited?[[50,new Set(['dose_rate'])]]:[])};
+  vm.createContext(context);vm.runInContext(chunk,context);await vm.runInContext('showFrameHint()',context);
+  assert.equal(values.dose_rate,expected);assert.equal(dose.value,expected);
+ }
+});
+
+test('sequential suggestions never overwrite an existing STA job editor',async()=>{
+ const vm=await import('node:vm'),source=await fs.readFile(new URL('../public/app.js',import.meta.url),'utf8');
+ const chunk=source.slice(source.indexOf('const sequentialRequests='),source.indexOf('let extractionRequest='));
+ const values={input_star_mics:'chosen.star'};
+ const context={pinnedId:null,copiedDraft:false,workspaceFeed:null,busy:false,selected:'CtfFind/job002/',values,api:()=>assert.fail('existing jobs must not request draft defaults')};
+ vm.createContext(context);vm.runInContext(chunk,context);await vm.runInContext('applySequentialDefaults()',context);assert.equal(values.input_star_mics,'chosen.star');
 });

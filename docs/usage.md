@@ -18,6 +18,8 @@ CTF estimation drafts offer local previews with FFT size, resolution and defocus
 
 LoG Auto-picking includes diameter overlays and Test picking. LoG diameter limits remain ordered. Preview selection, display filtering and scientific job settings have distinct roles; review settings before a full run.
 
+Auto-picking `autopick.star` outputs open in the browser picker in read-only mode. Saved particle coordinates appear as circles over the corresponding micrographs. Diameter, scale and contrast adjust the display only; adding/removing picks, saving, finishing jobs and particle cleanup are unavailable. Inspection reads the original input micrograph/optics metadata and output coordinate mapping without starting a manual-picking session. Missing input or coordinate files are reported rather than replaced with another job's picks.
+
 Browser tools include particle picking/selection, tilt-image exclusion, map viewing, local-resolution coloring and tomography picking. Some outputs still use native viewers, which require the server's graphical environment. Convergence plots and thumbnails are available for supported iterative jobs.
 
 ## STA helpers
