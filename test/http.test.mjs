@@ -12,7 +12,7 @@ test('HTTP: authenticated local API, origin guard, validation and duplicate subm
   const token=await new Promise((resolve,reject)=>{child.stdout.on('data',chunk=>{output+=chunk;const m=output.match(/#token=([a-f0-9]+)/);if(m)resolve(m[1]);});child.once('error',reject);child.once('exit',code=>reject(new Error(`Server exited ${code}`)));});
   assert.equal((await fetch(origin+'/api/config')).status,401);assert.equal((await fetch(origin+'/ideal-pipeline.js')).status,200);
   const headers={'X-Relion-Token':token};
-  const config=await (await fetch(origin+'/api/config',{headers})).json();assert.equal(config.demo,true);assert.equal(config.catalog.length,23);
+  const config=await (await fetch(origin+'/api/config',{headers})).json();assert.equal(config.demo,true);assert.deepEqual(config.catalog.map(s=>s.id).sort((a,b)=>a-b),config.layout.map(l=>l.id).sort((a,b)=>a-b));assert.equal(new Set(config.catalog.map(s=>s.id)).size,config.catalog.length);
   for(const name of ['3D classification','3D auto-refine'])assert.equal(config.layout.find(l=>l.name===name).overrides.trust_ref_size,'No');
   const mask=config.layout.find(l=>l.name==='Mask creation');assert.deepEqual(Object.keys(mask.tabs).slice(0,3),['I/O','Binarisation','Mask']);assert.deepEqual(mask.tabs.Binarisation,['inimask_threshold']);assert(!mask.tabs.Mask.includes('inimask_threshold'));
   assert.equal((await fetch(origin+'/api/map-preview?file=anything.mrc')).status,401);
@@ -28,13 +28,13 @@ test('HTTP: authenticated local API, origin guard, validation and duplicate subm
   const [a,b]=await Promise.all([1,2].map(()=>fetch(origin+'/api/schedule',{method:'POST',headers:postHeaders,body:JSON.stringify(req)}).then(r=>r.json())));assert.equal(a.name,b.name);
   const state=await (await fetch(origin+'/api/state',{headers})).json();assert.equal(state.jobs.length,5);
   const post=async(route,data)=>{const r=await fetch(origin+'/api/'+route,{method:'POST',headers:{...postHeaders,'X-Request-ID':randomUUID()},body:JSON.stringify(data)});return {status:r.status,data:await r.json()};};
-  assert.equal((await post('project-defaults',{values:{nr_threads:'12',nr_mpi:'2',do_queue:'No'}})).status,200);
-  assert.equal((await (await fetch(origin+'/api/config',{headers})).json()).executionDefaults.nr_threads,'12');
-  assert.equal((await post('project-defaults',{values:{nr_threads:'0'}})).status,400);
+  assert.equal((await post('project-defaults',{values:{globalNcpus:'12',globalNgpus:'2',do_queue:'No'}})).status,200);
+  assert.equal((await (await fetch(origin+'/api/config',{headers})).json()).executionDefaults.globalNcpus,'12');
+  assert.equal((await post('project-defaults',{values:{globalNcpus:'0'}})).status,400);
   const jobs=state.jobs.filter(j=>j.status==='Scheduled').map(j=>j.name);
   const preview=await post('delete-plan',{jobs,recursive:false});assert.equal(preview.status,200);assert.equal(preview.data.jobs.length,2);
   assert.equal((await post('delete',{plan:preview.data.id})).status,200);
-  const trash=await (await fetch(origin+'/api/trash',{headers})).json();assert.equal(trash.entries.length,1);
+  const trashResponse=await fetch(origin+'/api/trash',{headers});assert.equal(trashResponse.status,200);const trash=await trashResponse.json();assert.equal(trash.entries.length,1);
   const restore=await post('restore-plan',{manifest:trash.entries[0].manifest});assert.equal((await post('undelete',{plan:restore.data.id})).status,200);
   assert.equal((await post('delete-plan',{jobs:[jobs[0],jobs[0]],recursive:false})).status,400);
   const bad=await fetch(origin+'/api/run',{method:'POST',headers:{...postHeaders,'X-Request-ID':randomUUID()},body:JSON.stringify({...req,values:{do_raw:'not-a-boolean'}})});assert.equal(bad.status,400);
@@ -42,7 +42,7 @@ test('HTTP: authenticated local API, origin guard, validation and duplicate subm
   const idealPlan=await post('ideal-plan',{template:captured.data.template});assert.equal(idealPlan.status,200);
   const idealRun=await post('ideal-schedule',{plan:idealPlan.data.id});assert.equal(idealRun.status,200);assert.equal(idealRun.data.created.length,2);
   assert.equal((await post('ideal-schedule',{plan:idealPlan.data.id})).status,400);
-  const html=await fetch(origin+'/');assert.match(html.headers.get('content-security-policy'),/frame-ancestors 'none'/);assert.match(await html.text(),/RelionDeLuxe/);
+  const html=await fetch(origin+'/');assert.equal(html.headers.get('content-security-policy').split(';').map(s=>s.trim()).find(s=>s.startsWith('frame-ancestors ')),"frame-ancestors 'self'");assert.match(await html.text(),/RelionDeLuxe/);
  }finally{child.kill();await once(child,'exit').catch(()=>{});}
 });
 

@@ -2,7 +2,7 @@
 
 Public repository: https://github.com/estrozi/RelionDeLuxe
 
-The repository runs the full test suite on pushes and pull requests. Known failures remain visible in CI; do not describe a release as fully validated while those failures remain. Native integration and scientific acceptance require separate workstation testing.
+The repository runs the full test suite on pushes and pull requests. Do not describe a release as fully validated based on the automated suite alone; review failed and skipped checks in CI. Native integration and scientific acceptance require separate workstation testing.
 
 For each new release:
 

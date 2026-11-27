@@ -161,7 +161,8 @@ const fixture=JSON.parse(await fs.readFile(path.join(ROOT,tomo?'public/catalog-t
 const provenance=JSON.parse(await fs.readFile(path.join(ROOT,tomo?'public/provenance-tomo.json':'public/provenance.json'),'utf8'));
 const bridge=get('--bridge',process.env.RELION_DELUXE_BRIDGE)||await resolveExecutable('relion_deluxe_bridge')||path.join(ROOT,'build/relion_deluxe_bridge');
 const native=new NativeAdapter(project,bridge,{...process.env,RELIONDELUXE_MODE:tomo?'tomo':'spa'});
-const adapter=new MaskRescaleAdapter(tomo?new DominantAdapter(new CryocareAdapter(demo?new DemoAdapter(fixture,layout):native),project,readRoots):demo?new DemoAdapter([...fixture,helicalSchema,screeningSchema],layout):new DominantAdapter(new ScreeningAdapter(new HelicalAdapter(native),project,readRoots),project,readRoots),project,readRoots);
+const demoAdapter=demo?new DemoAdapter(tomo?fixture:[...fixture,helicalSchema,screeningSchema],layout):null;
+const adapter=new MaskRescaleAdapter(tomo?new DominantAdapter(new CryocareAdapter(demo?demoAdapter:native),project,readRoots):demo?demoAdapter:new DominantAdapter(new ScreeningAdapter(new HelicalAdapter(native),project,readRoots),project,readRoots),project,readRoots);
 if(tomo&&!demo){try{if(!(await native.call(['capabilities'])).tomography)throw Error('STA unavailable');}catch(e){console.error('Rebuild the native adapter from this release before using --tomo. '+e.message);process.exit(1);}}
 const trashActions=new TrashActions(adapter);
 const rescheduleActions=new RescheduleActions(project,adapter);
@@ -632,7 +633,7 @@ const server=http.createServer(async(req,res)=>{
  if(url.pathname==='/api/dominant-input')return json(res,200,await dominantInput(project,readRoots,url.searchParams.get('file')));
    if(url.pathname==='/api/cli-options'){const job=layout.find(l=>String(l.id)===url.searchParams.get('type'));if(!job)throw Error('Unknown job type');return json(res,200,demo?{options:[],message:'Executable CLI help is available in native mode.'}:await executableOptions(helpProgram(job.name,tomo,url.searchParams.get('variant')),{cwd:project,env:adapter.env||process.env}));}
    if(url.pathname==='/api/executables')return json(res,200,{demo,programs:await Promise.all(relionPrograms.map(async name=>({name,path:demo?null:await resolveExecutable(name,{cwd:project})}))),bridge:demo?null:bridge});
-   if(url.pathname==='/api/trash')return json(res,200,{entries:demo?adapter.trashEntries():await listTrash(project)});
+   if(url.pathname==='/api/trash')return json(res,200,{entries:demo?demoAdapter.trashEntries():await listTrash(project)});
    if(url.pathname==='/api/state')return json(res,200,await hasProject()?await decorateState(await adapter.call(['state'])):{jobs:[],nodes:[],counter:1});
    if(url.pathname==='/api/job'){const job=await currentJob(url.searchParams.get('name'));const data=await adapter.call(['job',url.searchParams.get('name')]);if(job.status==='Scheduled')data.values=await projectDefaults.forJob(url.searchParams.get('name'),data.values);return json(res,200,data);}
    if(url.pathname==='/api/log'){

@@ -49,7 +49,7 @@ test('Native ideal batch can plan and register the helical add-on after class-av
  try{await base.call(['init']);const p=await service.preview(t);const result=await service.execute(p.id);assert.deepEqual(result.created,['Select/job001/','InitialModelHelical/job002/']);assert.equal((await adapter.call(['job',result.created[1]])).values.fn_img,'Select/job001/class_averages.star');}finally{await fs.rm(project,{recursive:true,force:true});}
 });
 
-test('Capture omits inactive Import/queue paths, retaining shared paths needed by active jobs',async()=>{
+test('Capture omits inactive Import paths and replaces all queue paths with portable resources',async()=>{
  const imp=layout.find(l=>l.name==='Import'),motion=layout.find(l=>l.name==='Motion correction');
  const jobs=[{name:'Import/job001/',type:imp.id,status:'Succeeded'}, {name:'MotionCorr/job002/',type:motion.id,status:'Succeeded'}];
  const saved={
@@ -59,11 +59,11 @@ test('Capture omits inactive Import/queue paths, retaining shared paths needed b
  const adapter={call:async([action,name])=>action==='state'?{jobs}:{type:jobs.find(j=>j.name===name).type,values:saved[name]}};
  const service=new IdealPipelines({project:'/project',adapter,layout,catalog,defaults:{forJob:async(_,v)=>v}});
  let result=await service.capture(jobs.map(j=>j.name)),t=result.template;
- assert.equal(t.steps[0].values.fn_in_other,'');assert.equal(t.steps[0].values.qsubscript,'');
- assert(!Object.values(t.inputs).includes('ref.mrc'));assert(Object.values(t.inputs).includes('/cluster/qsub.csh'));
- assert.match(t.steps[1].values.qsubscript,/\$\{input:/);assert.equal(t.steps[1].values.input_star_mics,'${jobN}movies.star');
+ assert.equal(t.steps[0].values.fn_in_other,'');assert.equal(t.steps[0].values.qsubscript,'TBD');
+ assert(!Object.values(t.inputs).includes('ref.mrc'));assert(!Object.values(t.inputs).includes('/cluster/qsub.csh'));
+ assert.equal(t.steps[1].values.qsubscript,'TBD');assert.equal(t.steps[1].values.input_star_mics,'${jobN}movies.star');
  saved['MotionCorr/job002/'].do_queue='No';t=(await service.capture(jobs.map(j=>j.name))).template;
- assert(!Object.values(t.inputs).includes('/cluster/qsub.csh'));assert.equal(t.steps[1].values.qsubscript,'');
+ assert(!Object.values(t.inputs).includes('/cluster/qsub.csh'));assert.equal(t.steps[1].values.qsubscript,'TBD');
  saved['Import/job001/'].do_raw='No';saved['Import/job001/'].do_other='Yes';saved['Import/job001/'].fn_in_raw='Import/job001/stale.star';
  t=(await service.capture(['Import/job001/'])).template;assert.equal(t.steps[0].values.fn_in_raw,'');assert(Object.values(t.inputs).includes('ref.mrc'));assert.deepEqual(t.steps[0].dependencies,[]);
  assert.equal(saved['Import/job001/'].fn_in_raw,'Import/job001/stale.star'); // Capture never edits saved settings.

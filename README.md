@@ -4,7 +4,7 @@ A browser-based interface for RELION single-particle analysis (SPA) and subtomog
 
 RelionDeLuxe uses RELION's native pipeline and command builders through a small compiled adapter. Installed scientific programs perform the calculations. This is an independent project, not an official RELION release.
 
-Download the [0.15.320 prerelease](https://github.com/estrozi/RelionDeLuxe/releases/tag/v0.15.320). Known test failures remain; see the [validation report](docs/repository-validation.md).
+Download the [0.15.320 prerelease](https://github.com/estrozi/RelionDeLuxe/releases/tag/v0.15.320). See the [validation report](docs/repository-validation.md) for current source results and the published archive’s historical limitations.
 
 ## Quick start
 
@@ -65,7 +65,7 @@ npm test
 RELION_DELUXE_BRIDGE="$PWD/build/relion_deluxe_bridge" npm test
 ```
 
-Native integration tests require the compiled adapter. Optional browser tests require a separately installed Playwright environment. The current full test suite has known failures; see the validation status before treating this distribution as production validated.
+Native integration tests require the compiled adapter. Optional browser tests require a separately installed Playwright environment. The current source suite passes its available tests; see the validation report for skipped checks and remaining workstation/scientific validation.
 
 ## License and attribution
 

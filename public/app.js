@@ -101,7 +101,7 @@ async function showFrameHint(){
  if(mdoc?.numSubFrameValues?.length>1){text+=' · Warning: .mdoc files disagree on NumSubFrames ('+mdoc.numSubFrameValues.join(', ')+')';title+=' The .mdoc files report different frame counts.';}
  else if(mdoc?.numSubFrames&&Number.isInteger(result.frames)&&mdoc.numSubFrames!==result.frames){text+=' · Warning: .mdoc NumSubFrames='+mdoc.numSubFrames+' disagrees with detected '+result.frames+' frame'+(result.frames===1?'':'s');title+=' The .mdoc metadata and image frame count disagree.';}
  detectedFrameHints.set(pattern,{text,title});syncDisabled();
-if(mdoc?.dose!==null&&!(typeof editedInputDefaults!=='undefined'&&editedInputDefaults.get(type)?.has('dose_rate'))){const dose=$('#f-dose_rate'),defaultDose=schema().options.find(f=>f.key==='dose_rate')?.default;if(!values.dose_rate||values.dose_rate===defaultDose){values.dose_rate=String(mdoc.dose);if(dose)dose.value=values.dose_rate;drafts.set(type,{...values});}}
+if(Number.isFinite(mdoc?.dose)&&!(typeof editedInputDefaults!=='undefined'&&editedInputDefaults.get(type)?.has('dose_rate'))){const dose=$('#f-dose_rate'),defaultDose=schema().options.find(f=>f.key==='dose_rate')?.default;if(!values.dose_rate||values.dose_rate===defaultDose){values.dose_rate=String(mdoc.dose);if(dose)dose.value=values.dose_rate;drafts.set(type,{...values});}}
 }
 const importCounts=new Map(),importCountRequests=new Map();
 function watchImportPattern(input,key){

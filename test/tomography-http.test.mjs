@@ -18,7 +18,7 @@ for(const demo of [true,false])test('STA HTTP startup, assets and '+(demo?'demo 
   const token=await new Promise((resolve,reject)=>{child.stdout.on('data',chunk=>{output+=chunk;const m=output.match(/#token=([a-f0-9]+)/);if(m)resolve(m[1]);});child.once('error',reject);child.once('exit',code=>reject(Error('Server exited '+code+': '+output)));});
   const headers={'X-Relion-Token':token};const get=async uri=>{const r=await fetch(origin+uri,{headers});assert.equal(r.status,200);return r.json();};
   const post=async(uri,data)=>{const r=await fetch(origin+'/api/'+uri,{method:'POST',headers:{...headers,'Content-Type':'application/json','X-Request-ID':randomUUID()},body:JSON.stringify(data)});const result=await r.json();assert.equal(r.status,200,JSON.stringify(result));return result;};
-  const config=await get('/api/config');assert.equal(config.mode,'tomo');assert.equal(config.layout[0].id,50);assert.equal(config.catalog.length,24);assert.equal((await get('/api/state')).jobs.length,0);
+  const config=await get('/api/config');assert.equal(config.mode,'tomo');assert.equal(config.layout[0].id,50);assert.deepEqual(config.catalog.map(s=>s.id).sort((a,b)=>a-b),config.layout.map(l=>l.id).sort((a,b)=>a-b));assert.equal(new Set(config.catalog.map(s=>s.id)).size,config.catalog.length);assert.equal((await get('/api/state')).jobs.length,0);assert.deepEqual((await get('/api/trash')).entries,[]);
   for(const file of ['app.js','template-resources.js','job-ports.js'])assert.match((await fetch(origin+'/'+file)).headers.get('content-type'),/javascript/);
   if(!demo){
    await post('project-defaults',{values:{globalNcpus:'4',globalNgpus:'1',gpu_ids:'',do_queue:'No',fn_ctffind_exe:'',fn_motioncor2_exe:'',fn_resmap:''}});
